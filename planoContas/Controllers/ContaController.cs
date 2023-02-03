@@ -17,13 +17,6 @@ public class ContaController : ControllerBase
         _mediator = mediator;
     }
 
-    // [HttpGet(Name = "GetProximoCodigo")]
-    // public string GetProximoCodigo([FromQuery]string? CodigoContaPai)
-    // {
-    //     return "ok";
-    // }
-
-
     [HttpGet(Name = "GetContasPai")]
     public async Task<IEnumerable<ContaDto>> GetContas([FromQuery] bool pai)
     {

@@ -38,8 +38,11 @@ public class ContasRepositorySQL : IContasRepository
 
     public async Task<IEnumerable<Conta>> GetContasPai()
     {
-
         return await _db.Contas.Where(c => !c.AceitaLancamento).ToListAsync();
+    }
 
+    public async Task<Conta> GetConta(CodigoConta codigoConta)
+    {
+        return await _db.Contas.Where(c => c.CodigoConta == codigoConta).FirstAsync();
     }
 }

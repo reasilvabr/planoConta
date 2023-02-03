@@ -9,7 +9,7 @@ public class CodigoConta : IComparable<CodigoConta>
     {
         this.Codigo = CodigoConta.Parse(codigoConta);
     }
-    protected LinkedList<int> Codigo {get; set;}
+    public LinkedList<int> Codigo {get; private set;}
 
     public override string ToString()
     {

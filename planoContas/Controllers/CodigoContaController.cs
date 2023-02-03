@@ -18,8 +18,9 @@ public class CodigoContaController : ControllerBase
     }
 
     [HttpGet(Name = "GetProximoCodigo")]
-    public string GetProximoCodigo([FromQuery]string? CodigoPai)
+    public string GetProximoCodigo([FromQuery]string? codigoPai)
     {
+        var query = new CodigoContaGetQuery(codigoPai);
         return "ok";
     }
 }
