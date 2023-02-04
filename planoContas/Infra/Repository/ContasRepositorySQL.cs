@@ -25,9 +25,16 @@ public class ContasRepositorySQL : IContasRepository
 
     public async Task DeleteContaAsync(CodigoConta codigoConta)
     {
-        var conta = await _db.Contas.Where(c => c.CodigoConta == c.CodigoConta).FirstAsync();
+        var conta = await _db.Contas.Where(c => c.CodigoConta == codigoConta).FirstAsync();
         _db.Remove(conta);
-        await _db.SaveChangesAsync();
+        try
+        {
+            await _db.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("Conta não pode ter filhas.");
+        }
     }
 
     public async Task<IEnumerable<Conta>> GetContasAsync()

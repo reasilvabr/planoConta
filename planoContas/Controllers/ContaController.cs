@@ -34,8 +34,21 @@ public class ContaController : ControllerBase
     }
 
     [HttpPost(Name = "CreateConta")]
-    public void CreateConta([FromBody] ContaCreateCommand command)
+    public async Task CreateConta([FromBody] ContaCreateCommand command)
     {
-        _mediator.Send(command);
+        await _mediator.Send(command);
+    }
+
+    [HttpPut(Name = "UpdateConta")]
+    public async Task UpdateConta([FromBody] ContaUpdateCommand command)
+    {
+        await _mediator.Send(command);
+    }
+
+    [HttpDelete(Name = "DeleteConta")]
+    public async Task DeleteConta([FromQuery] string codigo)
+    {
+        var command = new ContaDeleteCommand(codigo);
+        await _mediator.Send(command);
     }
 }

@@ -33,6 +33,6 @@ public class ContasContext : DbContext
         modelBuilder.Entity<Conta>()
             .HasOne(c => c.ContaPai)
             .WithMany()
-            .HasForeignKey(c => c.CodigoContaPai);
+            .HasForeignKey(c => c.CodigoContaPai).OnDelete(DeleteBehavior.NoAction);
     }
 }

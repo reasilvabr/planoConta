@@ -61,4 +61,27 @@ public class CodigoConta : IComparable<CodigoConta>
         }
         return compara;
     }
+
+    public static bool ValidaCodigoPai(CodigoConta? pai, CodigoConta filho)
+    {
+        if (pai == null && filho.Level > 1)
+        {
+            return false;
+        }
+        if(pai != null && pai.Level != filho.Level - 1)
+        {
+            return false;
+        }
+        if(pai!=null)
+        {
+            for(int l = 1; l <= pai.Level; l++)
+            {
+                if(pai.CodigoPorLevel(l) != filho.CodigoPorLevel(l))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

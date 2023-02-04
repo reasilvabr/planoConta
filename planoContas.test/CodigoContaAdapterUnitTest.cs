@@ -19,8 +19,12 @@ public class CodigoContaAdapterUnitTest
                 "2.1",
                 "2.1.1",
                 "2.2",
-                "3"};
-            return contas.Select(c => new Conta(new CodigoConta(c), "a", ETipoConta.Receita, false));
+                "3",
+                "3.1",
+                "3.1.5",
+                "3.1.5.999",
+                "3.1.6"};
+            return contas.Select(c => new Conta(new CodigoConta(c), null, "a", ETipoConta.Receita, false));
         }
     }
 
@@ -58,6 +62,9 @@ public class CodigoContaAdapterUnitTest
     [InlineData("2.1", "2.1", "2.1.2")]
     [InlineData("2.1.1", "2.1.1", "2.1.1.1")]
     [InlineData(null, null, "4")]
+    [InlineData("3.1", "3.1", "3.1.7")]
+    [InlineData("3.1.5", "3.1", "3.1.7")]
+
     public void gera_proximo_codigo_ok(string codigoPai, string expectedPai, string expectedCodigo)
     {
         //arrange

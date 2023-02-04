@@ -31,11 +31,16 @@ public class Conta
                 throw new InvalidOperationException("Conta filha deve ter mesmo tipo do pai.");
             }
             _contaPai = value;
-            CodigoContaPai = value?.CodigoContaPai;
+            CodigoContaPai = value?.CodigoConta;
+            if(!CodigoConta.ValidaCodigoPai(CodigoContaPai, CodigoConta))
+            {
+                throw new InvalidOperationException("Código pai/filho incoerentes.");
+            }
         }
     }
-    public CodigoConta CodigoConta { get; set; }
-    public CodigoConta? CodigoContaPai { get; set; }
+    private CodigoConta _codigoConta;
+    public CodigoConta CodigoConta { get; private set; }
+    public CodigoConta? CodigoContaPai { get; private set; }
     public string Nome { get; set; }
     private ETipoConta _tipo;
     public ETipoConta Tipo

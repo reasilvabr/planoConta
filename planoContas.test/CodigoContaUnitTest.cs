@@ -126,4 +126,42 @@ public class CodigoContaUnitTest
         //assert
         Assert.True(actual);
     }
+
+    [Theory]
+    [InlineData("1", "1.1")]
+    [InlineData("1.2", "1.2.2")]
+    [InlineData("1.10.6.9", "1.10.6.9.100")]
+    [InlineData("10.10", "10.10.999")]
+    [InlineData(null, "200")]
+    public void valida_conta_pai_ok(string codigoPai, string codigoFilho)
+    {
+        //arrange
+        var a = codigoPai != null ? new CodigoConta(codigoPai) : null;
+        var b = new CodigoConta(codigoFilho);
+        
+        //act
+        var actual = CodigoConta.ValidaCodigoPai(a, b);
+        
+        //assert
+        Assert.True(actual);
+    }
+
+    [Theory]
+    [InlineData("1", "1.1.1")]
+    [InlineData("1.2", "1.3")]
+    [InlineData("1.10.6.9", "1.10.6.900")]
+    [InlineData("10.10.5.2", "10")]
+    [InlineData(null, "1.1")]
+    public void valida_conta_pai_nok(string codigoPai, string codigoFilho)
+    {
+        //arrange
+        var a = codigoPai != null ? new CodigoConta(codigoPai) : null;
+        var b = new CodigoConta(codigoFilho);
+        
+        //act
+        var actual = CodigoConta.ValidaCodigoPai(a, b);
+        
+        //assert
+        Assert.False(actual);
+    }
 }

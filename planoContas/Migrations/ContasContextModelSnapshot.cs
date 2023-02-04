@@ -43,7 +43,7 @@ namespace planoContas.Migrations
 
                     b.HasIndex("CodigoContaPai");
 
-                    b.ToTable("Contas");
+                    b.ToTable("Contas", (string)null);
                 });
 
             modelBuilder.Entity("PlanoContas.Domain.Conta.Entity.Conta", b =>
