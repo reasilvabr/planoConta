@@ -1,10 +1,11 @@
+using PlanoContas.Infra.Exception;
 using PlanoContas.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<PlanoContasExceptionFilter>());
 builder.Services.AddPlanoContasServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

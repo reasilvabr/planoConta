@@ -11,10 +11,18 @@ public class ContasRepositorySQL : IContasRepository
     {
         _db = db;
     }
+
     public async Task CreateContaAsync(Conta conta)
     {
         _db.Contas.Add(conta);
-        await _db.SaveChangesAsync();
+        try
+        {
+            await _db.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("Código já existente.");
+        }
     }
 
     public async Task UpdateContaAsync(Conta conta)
