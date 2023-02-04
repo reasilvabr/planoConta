@@ -9,16 +9,25 @@ public class CodigoConta : IComparable<CodigoConta>
     {
         this.Codigo = CodigoConta.Parse(codigoConta);
     }
-    public LinkedList<int> Codigo {get; private set;}
+    protected LinkedList<int> Codigo {get; private set;}
+
+    public int CodigoPorLevel(int? level = null)
+    {
+        if(level.HasValue)
+            return Codigo.ElementAt(level.Value - 1);
+        return Codigo.ElementAt(Level - 1);
+    }
 
     public override string ToString()
     {
         return string.Join('.', Codigo.ToArray());
     }
 
+    public int Level => Codigo.Count();
+
     public static bool Valida(string codigo)
     {
-        var regex = new Regex(@"^(\d{1,3}\.)*\d{1,3}$");
+        var regex = new Regex(@"^([1-9]{1}\d{0,2}\.)*[1-9]{1}\d{0,2}$");
         return codigo.Length <= 50 && regex.IsMatch(codigo);
     }
 

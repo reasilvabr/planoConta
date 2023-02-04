@@ -26,6 +26,7 @@ public class CodigoContaUnitTest
     [InlineData("1.9999")]
     [InlineData("1000")] 
     [InlineData("1.a.2.10")]
+    [InlineData("1.0.1")]
     public void valida_codigo_conta_nok(string codigo)
     {
         //arrange, act
@@ -59,6 +60,7 @@ public class CodigoContaUnitTest
     [InlineData("ab")]
     [InlineData("94893.1.1")]
     [InlineData("1.1.1.1000")]
+    [InlineData("1.0.1")]
     public void cria_codigo_conta_nok(string codigo)
     {
         //arrange

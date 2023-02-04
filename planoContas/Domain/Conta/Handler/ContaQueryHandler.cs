@@ -30,12 +30,12 @@ public class ContaQueryHandler :
 
     public async Task<string> Handle(CodigoContaGetQuery request, CancellationToken cancellationToken)
     {
-        
-        CodigoConta codigoContaPai = null;
+        Conta.Entity.Conta? contaPai = null;
         if(request.CodigoPai != null)
         {
-             codigoContaPai = new CodigoConta(request.CodigoPai);
+            var codigoContaPai = new CodigoConta(request.CodigoPai);
+            contaPai = await _repository.GetConta(codigoContaPai);
         }
-        var contaPai = await _repository.GetConta(codigoContaPai.ToString());
+        return string.Empty;
     }
 }

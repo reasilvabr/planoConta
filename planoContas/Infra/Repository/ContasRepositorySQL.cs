@@ -21,7 +21,6 @@ public class ContasRepositorySQL : IContasRepository
     {
         _db.Update(conta);
         await _db.SaveChangesAsync();
-
     }
 
     public async Task DeleteConta(CodigoConta codigoConta)
