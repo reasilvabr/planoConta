@@ -82,7 +82,9 @@ public class CodigoContaAdapter
         {
             var nodePai = tree.Encontra(codigoPai);
             if(nodePai != null)
+            {
                 pai = nodePai;
+            }
         }
         var maiorFilho = BuscaMaxFilho(codigoPai);
         if(maiorFilho != null)

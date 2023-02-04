@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace PlanoContas.Domain.Conta.Entity;
 
 public enum ETipoConta
@@ -32,7 +34,7 @@ public class Conta
             }
             _contaPai = value;
             CodigoContaPai = value?.CodigoConta;
-            if(!CodigoConta.ValidaCodigoPai(CodigoContaPai, CodigoConta))
+            if (!CodigoConta.ValidaPai(CodigoContaPai, CodigoConta))
             {
                 throw new InvalidOperationException("Código pai/filho incoerentes.");
             }
@@ -41,20 +43,10 @@ public class Conta
     private CodigoConta _codigoConta;
     public CodigoConta CodigoConta { get; private set; }
     public CodigoConta? CodigoContaPai { get; private set; }
+    
+    [Required]
+    [MinLength(3, ErrorMessage = "Nome deve ter ao menos 3 caracteres.")]
     public string Nome { get; set; }
-    private ETipoConta _tipo;
-    public ETipoConta Tipo
-    {
-        get => _tipo;
-        private set
-        {
-            if (ContaPai != null
-            && ContaPai.Tipo != value)
-            {
-                throw new InvalidOperationException("Conta filha deve ter mesmo tipo do pai.");
-            }
-            _tipo = value;
-        }
-    }
+    public ETipoConta Tipo { get; private set; }
     public bool AceitaLancamento { get; set; }
 }

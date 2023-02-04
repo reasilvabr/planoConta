@@ -23,8 +23,9 @@ public class CodigoContaAdapterUnitTest
                 "3.1",
                 "3.1.5",
                 "3.1.5.999",
-                "3.1.6"};
-            return contas.Select(c => new Conta(new CodigoConta(c), null, "a", ETipoConta.Receita, false));
+                "3.1.6",
+                "4"};
+            return contas.Select(c => new Conta(new CodigoConta(c), null, "abc", ETipoConta.Receita, false));
         }
     }
 
@@ -40,10 +41,10 @@ public class CodigoContaAdapterUnitTest
 
     [Theory]
     [InlineData("2", "2.2")]
-    [InlineData(null, "3")]
+    [InlineData(null, "4")]
     [InlineData("1", "1.1")]
     [InlineData("2.1", "2.1.1")]
-    [InlineData("3", null)]
+    [InlineData("4", null)]
     public void busca_max_filho_ok(string pai, string expected)
     {
         var listaContas = ContasParaTeste;
@@ -61,7 +62,7 @@ public class CodigoContaAdapterUnitTest
     [InlineData("2", "2", "2.3")]
     [InlineData("2.1", "2.1", "2.1.2")]
     [InlineData("2.1.1", "2.1.1", "2.1.1.1")]
-    [InlineData(null, null, "4")]
+    [InlineData(null, null, "5")]
     [InlineData("3.1", "3.1", "3.1.7")]
     [InlineData("3.1.5", "3.1", "3.1.7")]
 

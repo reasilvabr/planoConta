@@ -44,7 +44,7 @@ public class ContasRepositorySQL : IContasRepository
 
     public async Task<IEnumerable<Conta>> GetContasPaiAsync()
     {
-        return await _db.Contas.Where(c => !c.AceitaLancamento).ToListAsync();
+        return await _db.Contas.Where(c => c.AceitaLancamento == false).ToListAsync();
     }
 
     public async Task<Conta> GetContaAsync(CodigoConta codigoConta)

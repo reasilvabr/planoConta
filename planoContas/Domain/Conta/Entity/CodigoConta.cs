@@ -7,31 +7,11 @@ public class CodigoConta : IComparable<CodigoConta>
 {
     public CodigoConta(string codigoConta)
     {
-        this.Codigo = CodigoConta.Parse(codigoConta);
+        this.Codigo = ConverteParaLinkedList(codigoConta);
     }
     protected LinkedList<int> Codigo {get; private set;}
 
-    public int CodigoPorLevel(int? level = null)
-    {
-        if(level.HasValue)
-            return Codigo.ElementAt(level.Value - 1);
-        return Codigo.ElementAt(Level - 1);
-    }
-
-    public override string ToString()
-    {
-        return string.Join('.', Codigo.ToArray());
-    }
-
-    public int Level => Codigo.Count();
-
-    public static bool Valida(string codigo)
-    {
-        var regex = new Regex(@"^([1-9]{1}\d{0,2}\.)*[1-9]{1}\d{0,2}$");
-        return codigo.Length <= 50 && regex.IsMatch(codigo);
-    }
-
-    protected static LinkedList<int> Parse(string codigo)
+    protected LinkedList<int> ConverteParaLinkedList(string codigo)
     {
         if(!CodigoConta.Valida(codigo))
             throw new FormatException();
@@ -43,6 +23,20 @@ public class CodigoConta : IComparable<CodigoConta>
             retorno.AddLast(int.Parse(str));
         }
         return retorno;
+    }
+
+    public int Level => Codigo.Count();
+
+    public int CodigoPorLevel(int? level = null)
+    {
+        if(level.HasValue)
+            return Codigo.ElementAt(level.Value - 1);
+        return Codigo.ElementAt(Level - 1);
+    }
+
+    public override string ToString()
+    {
+        return string.Join('.', Codigo.ToArray());
     }
 
     public int CompareTo(CodigoConta? other)
@@ -62,7 +56,13 @@ public class CodigoConta : IComparable<CodigoConta>
         return compara;
     }
 
-    public static bool ValidaCodigoPai(CodigoConta? pai, CodigoConta filho)
+    public static bool Valida(string codigo)
+    {
+        var regex = new Regex(@"^([1-9]{1}\d{0,2}\.)*[1-9]{1}\d{0,2}$");
+        return codigo.Length <= 50 && regex.IsMatch(codigo);
+    }
+
+    public static bool ValidaPai(CodigoConta? pai, CodigoConta filho)
     {
         if (pai == null && filho.Level > 1)
         {

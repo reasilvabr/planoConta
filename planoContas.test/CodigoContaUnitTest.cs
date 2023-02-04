@@ -140,7 +140,7 @@ public class CodigoContaUnitTest
         var b = new CodigoConta(codigoFilho);
         
         //act
-        var actual = CodigoConta.ValidaCodigoPai(a, b);
+        var actual = CodigoConta.ValidaPai(a, b);
         
         //assert
         Assert.True(actual);
@@ -159,7 +159,7 @@ public class CodigoContaUnitTest
         var b = new CodigoConta(codigoFilho);
         
         //act
-        var actual = CodigoConta.ValidaCodigoPai(a, b);
+        var actual = CodigoConta.ValidaPai(a, b);
         
         //assert
         Assert.False(actual);

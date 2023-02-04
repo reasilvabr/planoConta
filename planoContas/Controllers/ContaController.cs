@@ -21,15 +21,17 @@ public class ContaController : ControllerBase
     public async Task<IEnumerable<ContaDto>> GetContas([FromQuery] bool? pai = null)
     {
         IEnumerable<Conta> retorno;
-        
+
         if (pai.HasValue && pai.Value)
         {
             var paiQuery = new ContaPaiGetQuery();
             retorno = await _mediator.Send<IEnumerable<Conta>>(paiQuery);
         }
-        var query = new ContaGetQuery();
-        retorno = await _mediator.Send<IEnumerable<Conta>>(query);
-
+        else
+        {
+            var query = new ContaGetQuery();
+            retorno = await _mediator.Send<IEnumerable<Conta>>(query);
+        }
         return retorno.OrderBy(c => c.CodigoConta).Select(c => new ContaDto(c));
     }
 
