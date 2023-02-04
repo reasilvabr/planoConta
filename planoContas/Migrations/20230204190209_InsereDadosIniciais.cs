@@ -5,7 +5,7 @@
 namespace planoContas.Migrations
 {
     /// <inheritdoc />
-    public partial class InsertValoresIniciais : Migration
+    public partial class InsereDadosIniciais : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

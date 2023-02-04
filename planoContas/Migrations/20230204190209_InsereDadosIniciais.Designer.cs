@@ -11,8 +11,8 @@ using PlanoContas.Infra.Data;
 namespace planoContas.Migrations
 {
     [DbContext(typeof(ContasContext))]
-    [Migration("20230203155707_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230204190209_InsereDadosIniciais")]
+    partial class InsereDadosIniciais
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,8 +32,7 @@ namespace planoContas.Migrations
                     b.Property<bool>("AceitaLancamento")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ContaPaiCodigoConta")
-                        .IsRequired()
+                    b.Property<string>("CodigoContaPai")
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Nome")
@@ -45,7 +44,7 @@ namespace planoContas.Migrations
 
                     b.HasKey("CodigoConta");
 
-                    b.HasIndex("ContaPaiCodigoConta");
+                    b.HasIndex("CodigoContaPai");
 
                     b.ToTable("Contas");
                 });
@@ -54,9 +53,7 @@ namespace planoContas.Migrations
                 {
                     b.HasOne("PlanoContas.Domain.Conta.Entity.Conta", "ContaPai")
                         .WithMany()
-                        .HasForeignKey("ContaPaiCodigoConta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CodigoContaPai");
 
                     b.Navigation("ContaPai");
                 });

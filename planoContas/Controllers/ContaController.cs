@@ -18,10 +18,11 @@ public class ContaController : ControllerBase
     }
 
     [HttpGet(Name = "GetContasPai")]
-    public async Task<IEnumerable<ContaDto>> GetContas([FromQuery] bool pai)
+    public async Task<IEnumerable<ContaDto>> GetContas([FromQuery] bool? pai = null)
     {
         IEnumerable<Conta> retorno;
-        if (pai)
+        
+        if (pai.HasValue && pai.Value)
         {
             var paiQuery = new ContaPaiGetQuery();
             retorno = await _mediator.Send<IEnumerable<Conta>>(paiQuery);

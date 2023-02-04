@@ -5,7 +5,7 @@
 namespace planoContas.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CriaTabela : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace planoContas.Migrations
                 columns: table => new
                 {
                     CodigoConta = table.Column<string>(type: "varchar(50)", nullable: false),
-                    ContaPaiCodigoConta = table.Column<string>(type: "varchar(50)", nullable: true),
+                    CodigoContaPai = table.Column<string>(type: "varchar(50)", nullable: true),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tipo = table.Column<int>(type: "int", nullable: false),
                     AceitaLancamento = table.Column<bool>(type: "bit", nullable: false)
@@ -24,17 +24,16 @@ namespace planoContas.Migrations
                 {
                     table.PrimaryKey("PK_Contas", x => x.CodigoConta);
                     table.ForeignKey(
-                        name: "FK_Contas_Contas_ContaPaiCodigoConta",
-                        column: x => x.ContaPaiCodigoConta,
+                        name: "FK_Contas_Contas_CodigoContaPai",
+                        column: x => x.CodigoContaPai,
                         principalTable: "Contas",
-                        principalColumn: "CodigoConta",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "CodigoConta");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contas_ContaPaiCodigoConta",
+                name: "IX_Contas_CodigoContaPai",
                 table: "Contas",
-                column: "ContaPaiCodigoConta");
+                column: "CodigoContaPai");
         }
 
         /// <inheritdoc />

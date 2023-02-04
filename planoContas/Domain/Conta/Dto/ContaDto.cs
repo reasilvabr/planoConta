@@ -4,7 +4,7 @@ public class ContaDto
 {
     public ContaDto(Conta.Entity.Conta conta){
         CodigoConta = conta.CodigoConta.ToString();
-        CodigoContaPai = conta.ContaPai?.CodigoConta.ToString();
+        CodigoContaPai = conta.CodigoContaPai?.ToString();
         Nome = conta.Nome;
         Tipo = (int)conta.Tipo;
         AceitaLancamento = conta.AceitaLancamento;

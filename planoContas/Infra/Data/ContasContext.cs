@@ -23,11 +23,16 @@ public class ContasContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Conta>(conta =>
-        { 
-            conta.Property(c => c.CodigoConta).HasConversion(c => c.ToString(), c=> new CodigoConta(c));
+        {
+            conta.Property(c => c.CodigoConta).HasConversion(c => c.ToString(), c => new CodigoConta(c));
             conta.Property(c => c.CodigoConta).HasColumnType("varchar(50)");
-            conta.HasOne(c => c.ContaPai);
-            conta.HasKey(c=> c.CodigoConta);
+            conta.Property(c => c.CodigoContaPai).HasConversion(c => c.ToString(), c => new CodigoConta(c));
+            conta.Property(c => c.CodigoContaPai).HasColumnType("varchar(50)");
+            conta.HasKey(c => c.CodigoConta);
         });
+        modelBuilder.Entity<Conta>()
+            .HasOne(c => c.ContaPai)
+            .WithMany()
+            .HasForeignKey(c => c.CodigoContaPai);
     }
 }

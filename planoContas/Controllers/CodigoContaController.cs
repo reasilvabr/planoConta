@@ -18,9 +18,9 @@ public class CodigoContaController : ControllerBase
     }
 
     [HttpGet(Name = "GetProximoCodigo")]
-    public string GetProximoCodigo([FromQuery]string? codigoPai)
+    public async Task<SugestaoCodigoContaDto> GetProximoCodigo([FromQuery]string? pai)
     {
-        var query = new CodigoContaGetQuery(codigoPai);
-        return "ok";
+        var query = new CodigoContaGetQuery(pai);
+        return await _mediator.Send(query);
     }
 }
