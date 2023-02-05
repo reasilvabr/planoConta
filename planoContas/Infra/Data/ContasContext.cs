@@ -27,8 +27,9 @@ public class ContasDBContext : DbContext
             conta.HasKey(c => c.CodigoConta);
         });
         modelBuilder.Entity<Conta>()
-            .HasOne(c => c.ContaPai)
+            .HasOne<Conta>()
             .WithMany()
             .HasForeignKey(c => c.CodigoContaPai).OnDelete(DeleteBehavior.NoAction);
+        modelBuilder.Entity<Conta>().Ignore(c => c.ContaPai);
     }
 }

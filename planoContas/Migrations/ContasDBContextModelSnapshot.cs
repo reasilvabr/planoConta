@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanoContas.Infra.Data;
 
@@ -11,11 +10,9 @@ using PlanoContas.Infra.Data;
 namespace planoContas.Migrations
 {
     [DbContext(typeof(ContasDBContext))]
-    [Migration("20230204190209_InsereDadosIniciais")]
-    partial class InsereDadosIniciais
+    partial class ContasDBContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,11 +48,10 @@ namespace planoContas.Migrations
 
             modelBuilder.Entity("PlanoContas.Domain.Conta.Entity.Conta", b =>
                 {
-                    b.HasOne("PlanoContas.Domain.Conta.Entity.Conta", "ContaPai")
+                    b.HasOne("PlanoContas.Domain.Conta.Entity.Conta", null)
                         .WithMany()
-                        .HasForeignKey("CodigoContaPai");
-
-                    b.Navigation("ContaPai");
+                        .HasForeignKey("CodigoContaPai")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 #pragma warning restore 612, 618
         }

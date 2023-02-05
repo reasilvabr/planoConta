@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace PlanoContas.Domain.Conta.Entity;
 
-public class CodigoConta : IComparable<CodigoConta>
+public class CodigoConta : IComparable<CodigoConta>, IEquatable<CodigoConta>
 {
     public CodigoConta(string codigoConta)
     {
@@ -83,5 +83,10 @@ public class CodigoConta : IComparable<CodigoConta>
             }
         }
         return true;
+    }
+
+    public bool Equals(CodigoConta? other)
+    {
+        return this.ToString() == other?.ToString();
     }
 }

@@ -21,9 +21,9 @@ public class ContasRepositorySQL : IContasRepository
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                throw new InvalidOperationException("Código já existente.");
+                throw new InvalidOperationException(ex.Message);
             }
         }
     }
@@ -47,9 +47,9 @@ public class ContasRepositorySQL : IContasRepository
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                throw new InvalidOperationException("Conta não pode ter filhas.");
+                throw new InvalidOperationException(ex.Message);
             }
         }
     }

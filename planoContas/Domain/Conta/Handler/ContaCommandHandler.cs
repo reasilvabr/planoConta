@@ -11,9 +11,11 @@ public class ContaCommandHandler :
     IRequestHandler<ContaDeleteCommand>
 {
     private readonly IContasRepository _repository;
+    private readonly ILogger<ContaCommandHandler> _logger;
 
-    public ContaCommandHandler(IContasRepository repository){
+    public ContaCommandHandler(IContasRepository repository, ILogger<ContaCommandHandler> logger){
         _repository = repository;
+        _logger = logger;
     }
 
 
@@ -32,6 +34,7 @@ public class ContaCommandHandler :
                 (ETipoConta)request.Tipo, 
                 request.AceitaLancamento);
         conta.ContaPai = contaPai;
+        _logger.LogInformation($"Criando nova conta com conta:{conta.CodigoConta}, contaPai:{conta.CodigoContaPai}");
         await _repository.CreateContaAsync(conta);
         return Unit.Value;
     }

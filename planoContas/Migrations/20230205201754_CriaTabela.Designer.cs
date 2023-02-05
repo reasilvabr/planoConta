@@ -11,7 +11,7 @@ using PlanoContas.Infra.Data;
 namespace planoContas.Migrations
 {
     [DbContext(typeof(ContasDBContext))]
-    [Migration("20230204190104_CriaTabela")]
+    [Migration("20230205201754_CriaTabela")]
     partial class CriaTabela
     {
         /// <inheritdoc />
@@ -51,11 +51,10 @@ namespace planoContas.Migrations
 
             modelBuilder.Entity("PlanoContas.Domain.Conta.Entity.Conta", b =>
                 {
-                    b.HasOne("PlanoContas.Domain.Conta.Entity.Conta", "ContaPai")
+                    b.HasOne("PlanoContas.Domain.Conta.Entity.Conta", null)
                         .WithMany()
-                        .HasForeignKey("CodigoContaPai");
-
-                    b.Navigation("ContaPai");
+                        .HasForeignKey("CodigoContaPai")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 #pragma warning restore 612, 618
         }

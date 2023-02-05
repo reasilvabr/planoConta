@@ -2,6 +2,8 @@ using PlanoContas.Infra.Exception;
 using PlanoContas.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 // Add services to the container.
 

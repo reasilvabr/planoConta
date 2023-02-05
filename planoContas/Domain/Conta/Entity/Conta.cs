@@ -13,10 +13,10 @@ public class Conta
     public Conta(CodigoConta codigoConta, CodigoConta? codigoContaPai, string nome, ETipoConta tipo, bool aceitaLancamento)
     {
         CodigoConta = codigoConta;
-        CodigoContaPai = codigoContaPai;
         Nome = nome;
         Tipo = tipo;
         AceitaLancamento = aceitaLancamento;
+        CodigoContaPai = codigoContaPai;
     }
     private Conta? _contaPai;
     public Conta? ContaPai
@@ -40,7 +40,6 @@ public class Conta
             }
         }
     }
-    private CodigoConta _codigoConta;
     public CodigoConta CodigoConta { get; private set; }
     public CodigoConta? CodigoContaPai { get; private set; }
     
