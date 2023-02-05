@@ -3,21 +3,17 @@ using PlanoContas.Domain.Conta.Entity;
 
 namespace PlanoContas.Infra.Data;
 
-public class ContasContext : DbContext
+public class ContasDBContext : DbContext
 {
 
-    public ContasContext(string connectionString)
+    public ContasDBContext(DbContextOptions<ContasDBContext> options): base(options)
     {
-        ConnectionString = connectionString;
     }
-
-    string ConnectionString { get; set; }
 
     public DbSet<Conta> Contas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(ConnectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -6,57 +6,75 @@ namespace PlanoContas.Infra.Repository;
 
 public class ContasRepositorySQL : IContasRepository
 {
-    private readonly ContasContext _db;
-    public ContasRepositorySQL(ContasContext db)
+    private readonly IDbContextFactory<ContasDBContext> _dbContextFactory;
+    public ContasRepositorySQL(IDbContextFactory<ContasDBContext> dbContextFactory)
     {
-        _db = db;
+        _dbContextFactory = dbContextFactory;
     }
 
     public async Task CreateContaAsync(Conta conta)
     {
-        _db.Contas.Add(conta);
-        try
+        using (var db = _dbContextFactory.CreateDbContext())
         {
-            await _db.SaveChangesAsync();
-        }
-        catch (DbUpdateException)
-        {
-            throw new InvalidOperationException("Código já existente.");
+            db.Contas.Add(conta);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Código já existente.");
+            }
         }
     }
 
     public async Task UpdateContaAsync(Conta conta)
     {
-        _db.Update(conta);
-        await _db.SaveChangesAsync();
+        using (var db = _dbContextFactory.CreateDbContext())
+        {
+            db.Update(conta);
+            await db.SaveChangesAsync();
+        }
     }
 
     public async Task DeleteContaAsync(CodigoConta codigoConta)
     {
-        var conta = await _db.Contas.Where(c => c.CodigoConta == codigoConta).FirstAsync();
-        _db.Remove(conta);
-        try
+        using (var db = _dbContextFactory.CreateDbContext())
         {
-            await _db.SaveChangesAsync();
-        }
-        catch (DbUpdateException)
-        {
-            throw new InvalidOperationException("Conta não pode ter filhas.");
+            var conta = await db.Contas.Where(c => c.CodigoConta == codigoConta).FirstAsync();
+            db.Remove(conta);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Conta não pode ter filhas.");
+            }
         }
     }
 
     public async Task<IEnumerable<Conta>> GetContasAsync()
     {
-        return await _db.Contas.ToListAsync();
+        using (var db = _dbContextFactory.CreateDbContext())
+        {
+            return await db.Contas.ToListAsync();
+        }
     }
 
     public async Task<IEnumerable<Conta>> GetContasPaiAsync()
     {
-        return await _db.Contas.Where(c => c.AceitaLancamento == false).ToListAsync();
+        using (var db = _dbContextFactory.CreateDbContext())
+        {
+            return await db.Contas.Where(c => c.AceitaLancamento == false).ToListAsync();
+        }
     }
 
     public async Task<Conta> GetContaAsync(CodigoConta codigoConta)
     {
-        return await _db.Contas.Where(c => c.CodigoConta == codigoConta).FirstAsync();
+        using (var db = _dbContextFactory.CreateDbContext())
+        {
+            return await db.Contas.Where(c => c.CodigoConta == codigoConta).FirstAsync();
+        }
     }
 }

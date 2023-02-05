@@ -10,7 +10,7 @@ using PlanoContas.Infra.Data;
 
 namespace planoContas.Migrations
 {
-    [DbContext(typeof(ContasContext))]
+    [DbContext(typeof(ContasDBContext))]
     [Migration("20230204190104_CriaTabela")]
     partial class CriaTabela
     {

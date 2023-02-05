@@ -9,7 +9,7 @@ using PlanoContas.Infra.Data;
 
 namespace planoContas.Migrations
 {
-    [DbContext(typeof(ContasContext))]
+    [DbContext(typeof(ContasDBContext))]
     partial class ContasContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
