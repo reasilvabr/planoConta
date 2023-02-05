@@ -11,7 +11,7 @@ Antes de executar o passo a passo abaixo é necessário ter o Docker e o plugin 
 
 ### Instruções
 
-1. Após baixar o código fonte, entre na pasta *./planoContas* e execute o comando abaixo para fazer o build da aplicação e criar as imagens de container no Docker:
+1. Após baixar o código fonte, entre na pasta *./app/* e execute o comando abaixo para fazer o build da aplicação e criar as imagens de container no Docker:
 
     `$ docker-compose build`
 
@@ -23,10 +23,10 @@ Antes de executar o passo a passo abaixo é necessário ter o Docker e o plugin 
 
     `$ docker ps`
 
-    ![Saída do commando docker ps](./planoContas/assets/docker_ps_result.png)
+    ![Saída do commando docker ps](./app/assets/docker_ps_result.png)
 
 1. Precisamos aplicar a criação das tabelas e inclusão de alguns dados iniciais no SQL executando o comando abaixo (note que usamos o nome do container *planocontas_api_1* criado):
     
-    `$ docker exec planocontas_api_1 ./efbundle`
+    `$ docker exec app_api_1 ./efbundle`
 
 E isso é tudo! Basta acessar [*http://localhost/swagger*](http://localhost/swagger) no navegador para ter acesso à documentação autogerada da API.
