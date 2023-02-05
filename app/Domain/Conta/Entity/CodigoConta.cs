@@ -14,7 +14,7 @@ public class CodigoConta : IComparable<CodigoConta>, IEquatable<CodigoConta>
     protected LinkedList<int> ConverteParaLinkedList(string codigo)
     {
         if(!CodigoConta.Valida(codigo))
-            throw new FormatException();
+            throw new InvalidOperationException("Código inválido.");
 
         var retorno = new LinkedList<int>();
         var arrayCodigo = codigo.Split('.');

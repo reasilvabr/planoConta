@@ -25,7 +25,7 @@ Antes de executar o passo a passo abaixo é necessário ter o Docker e o plugin 
 
     ![Saída do commando docker ps](./app/assets/docker_ps_result.png)
 
-1. Precisamos aplicar a criação das tabelas e inclusão de alguns dados iniciais no SQL executando o comando abaixo (note que usamos o nome do container *planocontas_api_1* criado):
+1. Precisamos aplicar a criação das tabelas e inclusão de alguns dados iniciais no SQL executando o comando abaixo (note que usamos o nome do container *app_api_1* criado):
     
     `$ docker exec app_api_1 ./efbundle`
 
